@@ -1,0 +1,139 @@
+<!doctype html><html><head><title>Donezo Dashboard</title><script src="https://unpkg.com/react@18/umd/react.development.js"></script><script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script><script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script><script src="https://cdn.jsdelivr.net/npm/chart.js"></script><style>body{margin:0;background:#e9ecef;font-family:"Segoe UI",sans-serif}.wrapper{margin:30px;background:#f8f9fa;border-radius:20px;display:flex;overflow:hidden}.sidebar{width:230px;background:#fff;padding:25px}.logo{font-weight:700;font-size:20px;color:#1d976c;margin-bottom:30px}.menu li{list-style:none;padding:12px 0;color:#555;cursor:pointer}.menu li.active{color:#1d976c;font-weight:600}.main{flex:1;padding:30px}.topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:25px}.search{background:#fff;padding:10px 15px;border-radius:25px;width:250px;border:none;outline:0}.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-bottom:25px}.card{background:#fff;padding:20px;border-radius:15px}.card.green{background:linear-gradient(135deg,#1d976c,#2ecc71);color:#fff}.grid{display:grid;grid-template-columns:2fr 1fr;gap:20px}.box{background:#fff;padding:5px;border-radius:15px}.progress-circle{width:150px;height:150px;border-radius:50%;background:conic-gradient(#1d976c 0 41%,#eee 41% 100%);display:flex;align-items:center;justify-content:center;font-size:26px;font-weight:700;margin:auto}.time-box{background:linear-gradient(135deg,#0f2027,#1d976c);color:#fff;text-align:center}.time-box h1{font-size:32px;margin:15px 0}.top-buttons{display:flex;gap:10px;margin-bottom:20px}.top-buttons button{margin-left:50px;padding:10px 55px;border-radius:18px;border:none;cursor:pointer;color:#fff;font-weight:700}.add-project{background-color:#1d976c}.import-data{background-color:#555}.team-members{display:flex;justify-content:center;gap:10px;margin-top:10px}.member-circle{width:100px;height:40px;border-radius:10px;background-color:#1d976c;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;cursor:pointer}.member-b{background-color:#2ecc71}.member-c{background-color:#16a085}</style><script defer="defer" src="/static/js/main.6981ff0c.js"></script><link href="/static/css/main.f855e6bc.css" rel="stylesheet"></head><body><div id="root"></div><script type="text/babel">function Sidebar() {
+  return (
+    <div className="sidebar">
+      <div className="logo">Donezo</div>
+      <ul className="menu">
+        <li className="active">Dashboard</li>
+        <li>Tasks</li>
+        <li>Calendar</li>
+        <li>Analytics</li>
+        <li>Team</li>
+        <hr/>
+        <li>Settings</li>
+        <li>Help</li>
+        <li>Logout</li>
+      </ul>
+    </div>
+  );
+}
+
+function StatsCards() {
+  return (
+    <div>
+      
+      <div className="top-buttons">
+        <p>DashBoard
+        <button className="add-project">Add Project</button>
+        <button className="import-data">Import Data</button></p>
+      </div>
+
+      
+      <div className="cards">
+        <div className="card green">
+          <p>Total Projects</p>
+          <h2>24</h2>
+        </div>
+        <div className="card">
+          <p>Ended Projects</p>
+          <h2>10</h2>
+        </div>
+        <div className="card">
+          <p>Running Projects</p>
+          <h2>12</h2>
+        </div>
+        <div className="card">
+          <p>Pending Projects</p>
+          <h2>2</h2>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function ProjectAnalytics() {
+  React.useEffect(() => {
+    new Chart(document.getElementById("chart"), {
+      type: "bar",
+      data: {
+        labels: ["S","M","T","W","T","F","S"],
+        datasets: [{
+          data: [4,8,6,9,5,7,3],
+          borderRadius: 10
+        }]
+      },
+      options: {
+        plugins: { legend: { display:false }},
+        scales: { y: { beginAtZero:true }}
+      }
+    });
+  }, []);
+
+  return (
+    <div className="box">
+      <h3>Project Analytics</h3>
+      <canvas id="chart"></canvas>
+    </div>
+  );
+}
+
+function RightSide() {
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+      <div className="box">
+        <h3>Project Progress</h3>
+        <div className="progress-circle">41%</div>
+      </div>
+
+     
+      <div style={{ display: "flex", gap: "20px" }}>
+        
+        <div className="box" style={{ flex: 1, textAlign: "center" }}>
+          <h3>Reminder</h3>
+          <h1>Meeting With Arc Company</h1>
+          <div className="team-members">
+            <div className="member-circle">Start Meeting</div>
+            
+           
+          </div>
+        </div>
+
+        
+        <div className="box time-box" style={{ flex: 1 }}>
+          <h3>Time Tracker</h3>
+          <h1>01:24:08</h1>
+          <button>⏸</button>
+          <button>⏹</button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function Dashboard() {
+  return (
+    <div className="main">
+      <div className="topbar">
+        <input className="search" placeholder="Search task..." />
+        <div>Totok Michael</div>
+      </div>
+
+      <StatsCards />
+
+      <div className="grid">
+        <ProjectAnalytics />
+        <RightSide />
+      </div>
+    </div>
+  );
+}
+
+function App() {
+  return (
+    <div className="wrapper">
+      <Sidebar />
+      <Dashboard />
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);</script></body></html>
